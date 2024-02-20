@@ -17,7 +17,7 @@ pipeline {
     stage('deploy kubernetes') {
       steps {
         sh '''
-        ansible master -m command -a 'kubectl create deploy myweb3 --image=seowooo3117/cicdtest:red'
+        ansible master -m command -a 'kubectl create deploy myweb3 --image=seowooo3117/cicdtest:green'
         ansible master -m command -a 'kubectl expose deploy myweb3 --type="LoadBalancer" --port=80 --target-port=80 --protocol="TCP"'
         ansible master -m command -a 'kubectl get svc'
         '''
