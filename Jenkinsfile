@@ -9,16 +9,16 @@ pipeline {
     stage('docker build and push') {
       steps {
         sh '''
-        sudo docker build -t seowooo3117/cicdtest:scm .
-        sudo docker push seowooo3117/cicdtest:scm
+        sudo docker build -t seowooo3117/cicdtest:scm1 .
+        sudo docker push seowooo3117/cicdtest:scm1
         '''
       }
     }
     stage('deploy kubernetes') {
       steps {
         sh '''
-        ansible master -m command -a 'kubectl create deploy myweb3 --image=seowooo3117/cicdtest:red'
-        ansible master -m command -a 'kubectl expose deploy myweb3 --type="LoadBalancer" --port=80 --target-port=80 --protocol="TCP"'
+        ansible master -m command -a 'kubectl create deploy myweb4 --image=seowooo3117/cicdtest:blue'
+        ansible master -m command -a 'kubectl expose deploy myweb4 --type="LoadBalancer" --port=80 --target-port=80 --protocol="TCP"'
         ansible master -m command -a 'kubectl get svc'
         '''
       }
